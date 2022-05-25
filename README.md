@@ -1,1 +1,1 @@
-# Word-Day-Scheduler
+# Work-Day-Scheduler
