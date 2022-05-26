@@ -29,7 +29,7 @@ createTimeBlock = (timeBlock) => {
         appointment.addClass('text-dark col-8');
         timeBlock.append(appointment);
 
-        button = $('<button></button>');
+        button = $('<button><i>Save</i></button>');
         button.addClass('saveBtn col-2');
         timeBlock.append(button);
 
