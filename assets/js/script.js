@@ -23,26 +23,26 @@ createTimeBlock = (timeBlock) => {
 
         hour = $('<div></div>');
         hour.addClass('hour col-2 pt-2');
-        timeBlock.append(hour);      
-
+        timeBlock.append(hour);
+        
         appointment = $('<input></input>');
         appointment.addClass('text-dark col-8');
+        appointment.attr('type', 'text');
         timeBlock.append(appointment);
 
         button = $('<button><i>Save</i></button>');
         button.addClass('saveBtn col-2');
         timeBlock.append(button);
 
+        appointment.attr('id', `appt${i}00`);
+        button.attr('id', `save${i}00`);
+
         if (i < 13) {
             console.log(i);
             hour.text(`${i}:00am`);
-            appointment.attr('id', `appt${i}am`);
-            button.attr('id', `save${i}am`);
         } else if (i >= 13) {
             console.log(i-12);
-            hour.text(`${i-12}:00pm`);
-            appointment.attr('id', `appt${i-12}pm`);
-            button.attr('id', `save${i-12}pm`);            
+            hour.text(`${i-12}:00pm`);        
         };
 
         if (i < currentHour) {
@@ -56,3 +56,13 @@ createTimeBlock = (timeBlock) => {
 };
 
 createTimeBlock(timeBlock);
+button = $('.saveBtn');
+
+// Listen for Submit Button
+button.click(function(event) {
+    event.preventDefault();
+    let targetId = $(this).attr('id');
+    console.log (`${targetId} button was clicked`);
+});
+
+

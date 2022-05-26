@@ -74,5 +74,5 @@ textarea {
 .saveBtn:active {
   color: #c1c1c1;
   background-color: #034b5c;
-  transition: all 0.1s ease-in-out;
+  transition: all 0s ease-in-out;
 }
