@@ -1,10 +1,10 @@
 let currentDay = $('#currentDay');
 let container = $('.container');
-let currentHour = moment().hour(); 
+let currentHour = moment().hour();
 let row;
 let timeBlock;
 let hour;
-let textBox;
+let appointment;
 let button;
 
 // Display current day and date in heading
@@ -15,34 +15,42 @@ createTimeBlock = (timeBlock) => {
     for (let i = 6; i < 22; i++) {
         row = $('<div></div>');
         row.addClass('row');
-        timeBlock = $('<div></div>');
-        timeBlock.addClass('time-block row w-100');
         container.append(row);
+
+        timeBlock = $('<div></div>');
+        timeBlock.addClass('time-block row w-100');        
         row.append(timeBlock);
+
         hour = $('<div></div>');
         hour.addClass('hour col-2 pt-2');
-        timeBlock.append(hour);
-        textBox = $('<div></div>');
-        textBox.addClass('col-8');
-        timeBlock.append(textBox);
+        timeBlock.append(hour);      
+
+        appointment = $('<input></input>');
+        appointment.addClass('text-dark col-8');
+        timeBlock.append(appointment);
+
         button = $('<button></button>');
         button.addClass('saveBtn col-2');
         timeBlock.append(button);
+
         if (i < 13) {
             console.log(i);
             hour.text(`${i}:00am`);
-            timeBlock.attr('id', `${i}am`);
+            appointment.attr('id', `appt${i}am`);
+            button.attr('id', `save${i}am`);
         } else if (i >= 13) {
             console.log(i-12);
             hour.text(`${i-12}:00pm`);
-            timeBlock.attr('id', `${i-12}pm`);            
+            appointment.attr('id', `appt${i-12}pm`);
+            button.attr('id', `save${i-12}pm`);            
         };
+
         if (i < currentHour) {
-            textBox.addClass('past');
+            appointment.addClass('past');
         } else if (i == currentHour) {
-            textBox.addClass('present');
+            appointment.addClass('present');
         } else if (i > currentHour) {
-            textBox.addClass('future');
+            appointment.addClass('future');
         };
     };
 };
