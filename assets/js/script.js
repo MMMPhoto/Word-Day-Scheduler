@@ -40,8 +40,10 @@ createTimeBlock = (timeBlock) => {
         hour.addClass(`hour col-2 pt-2 ${i}00`);
         timeBlock.append(hour);
         
-        appointment = $('<input></input>');
+        appointment = $('<input>');
         appointment.addClass(`text-dark col-8 ${i}00`);
+        let eachEntry = calendarEntries[i-6].appt;
+        appointment.attr('value', `${eachEntry}`);
         // appointment.attr('type', 'text');
         timeBlock.append(appointment);
 
@@ -53,12 +55,14 @@ createTimeBlock = (timeBlock) => {
         button.attr('id', `hour${i}`);
         // appointment.attr('name', `${i}00`);
 
+        // Display am or pm
         if (i < 13) {
             hour.text(`${i}:00am`);
         } else if (i >= 13) {
             hour.text(`${i-12}:00pm`);        
         };
 
+        // Add color coding based on current time of day
         if (i < currentHour) {
             appointment.addClass('past');
         } else if (i == currentHour) {
