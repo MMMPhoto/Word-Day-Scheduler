@@ -14,12 +14,13 @@ if (calendarEntries === null) {
     calendarEntries = [];
     for (let i = 6; i < 22; i++) {
         calendarEntries[i-6] = {
-            hour: `${i}`,
+            name: `hour${i}`,
             appt: ''
         };
     };
-    console.log(calendarEntries);
+    localStorage.setItem("calendarEntries", JSON.stringify(calendarEntries));
 };
+console.log(calendarEntries);
 
 // Display current day and date in heading
 currentDay.text(`Today is ${moment().format('dddd, MMMM Do YYYY')}`);
@@ -49,7 +50,7 @@ createTimeBlock = (timeBlock) => {
         // button.attr('type', 'submit');
         timeBlock.append(button);
 
-        // timeBlock.attr('id', `${i}00Hour`);
+        button.attr('id', `hour${i}`);
         // appointment.attr('name', `${i}00`);
 
         if (i < 13) {
@@ -75,13 +76,18 @@ button = $('.saveBtn');
 button.click(function(event) {
     event.preventDefault();
     let targetValue = $(this).siblings('input').val();
-    console.log (`${targetValue} is registered`);
-
-    // calendarEntries = [];
-    // calendarEntries = JSON.parse(localStorage.getItem("calendarEntries")) || [];
-    // calendarEntries.push(newScore);
-    // localStorage.setItem("allHighScores", JSON.stringify(highScoreTally));
-
+    let targetId = $(this).attr('id');
+    console.log(`${targetValue} is registered`);
+    console.log(`${targetId} is the Id`);
+    let entry;
+    let calendarIndex = calendarEntries.findIndex(
+        (entry) => entry.name === `${targetId}`
+    );
+    console.log(`${calendarIndex} is the index`);
+    calendarEntries = JSON.parse(localStorage.getItem("calendarEntries"));
+    calendarEntries[calendarIndex] = {name: `${targetId}`, appt: `${targetValue}`};
+    console.log(calendarEntries);
+    localStorage.setItem("calendarEntries", JSON.stringify(calendarEntries));
 });
 
 
