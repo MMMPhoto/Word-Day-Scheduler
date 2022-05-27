@@ -33,33 +33,29 @@ createTimeBlock = (timeBlock) => {
         container.append(row);
 
         timeBlock = $('<form></form>');
-        timeBlock.addClass(`time-block row w-100 ${i}00`);        
+        timeBlock.addClass(`time-block row w-100 ${i}00`);
+        timeBlock.attr('id', `hour${i}`);      
         row.append(timeBlock);
 
         hour = $('<label></label>');
-        hour.addClass(`hour col-2 pt-2 ${i}00`);
+        hour.addClass(`hour text-wrap col-2 pt-4 pr-1 ${i}00`);
         timeBlock.append(hour);
         
         appointment = $('<input>');
-        appointment.addClass(`text-dark col-8 ${i}00`);
+        appointment.addClass(`text-dark text-wrap col-8 ${i}00`);
         let eachEntry = calendarEntries[i-6].appt;
         appointment.attr('value', `${eachEntry}`);
-        // appointment.attr('type', 'text');
         timeBlock.append(appointment);
 
         button = $('<button><i>Save</i></button>');
-        button.addClass(`saveBtn col-2 ${i}00`);
-        // button.attr('type', 'submit');
+        button.addClass(`saveBtn text-center col-2 pl-2 ${i}00`);
         timeBlock.append(button);
-
-        button.attr('id', `hour${i}`);
-        // appointment.attr('name', `${i}00`);
 
         // Display am or pm
         if (i < 13) {
-            hour.text(`${i}:00am`);
+            hour.text(`${i}:00 am`);
         } else if (i >= 13) {
-            hour.text(`${i-12}:00pm`);        
+            hour.text(`${i-12}:00 pm`);        
         };
 
         // Add color coding based on current time of day
@@ -80,10 +76,9 @@ button = $('.saveBtn');
 button.click(function(event) {
     event.preventDefault();
     let targetValue = $(this).siblings('input').val();
-    let targetId = $(this).attr('id');
-    console.log(`${targetValue} is registered`);
+    let targetId = $(this).parent().attr('id');
+    console.log(`${targetValue} is new appointment text`);
     console.log(`${targetId} is the Id`);
-    let entry;
     let calendarIndex = calendarEntries.findIndex(
         (entry) => entry.name === `${targetId}`
     );
@@ -93,5 +88,3 @@ button.click(function(event) {
     console.log(calendarEntries);
     localStorage.setItem("calendarEntries", JSON.stringify(calendarEntries));
 });
-
-
