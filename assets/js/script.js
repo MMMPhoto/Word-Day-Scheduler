@@ -7,6 +7,20 @@ let hour;
 let appointment;
 let button;
 
+// Pull calendar entries from local storage
+let calendarEntries = JSON.parse(localStorage.getItem("calendarEntries"));
+// Create if calendar entries is null
+if (calendarEntries === null) {
+    calendarEntries = [];
+    for (let i = 6; i < 22; i++) {
+        calendarEntries[i-6] = {
+            hour: `${i}`,
+            appt: ''
+        };
+    };
+    console.log(calendarEntries);
+};
+
 // Display current day and date in heading
 currentDay.text(`Today is ${moment().format('dddd, MMMM Do YYYY')}`);
 
@@ -35,14 +49,12 @@ createTimeBlock = (timeBlock) => {
         // button.attr('type', 'submit');
         timeBlock.append(button);
 
-        timeBlock.attr('id', `${i}00Hour`);
+        // timeBlock.attr('id', `${i}00Hour`);
         // appointment.attr('name', `${i}00`);
 
         if (i < 13) {
-            console.log(i);
             hour.text(`${i}:00am`);
         } else if (i >= 13) {
-            console.log(i-12);
             hour.text(`${i-12}:00pm`);        
         };
 
@@ -64,6 +76,12 @@ button.click(function(event) {
     event.preventDefault();
     let targetValue = $(this).siblings('input').val();
     console.log (`${targetValue} is registered`);
+
+    // calendarEntries = [];
+    // calendarEntries = JSON.parse(localStorage.getItem("calendarEntries")) || [];
+    // calendarEntries.push(newScore);
+    // localStorage.setItem("allHighScores", JSON.stringify(highScoreTally));
+
 });
 
 
