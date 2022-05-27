@@ -17,25 +17,26 @@ createTimeBlock = (timeBlock) => {
         row.addClass('row');
         container.append(row);
 
-        timeBlock = $('<div></div>');
-        timeBlock.addClass('time-block row w-100');        
+        timeBlock = $('<form></form>');
+        timeBlock.addClass(`time-block row w-100 ${i}00`);        
         row.append(timeBlock);
 
-        hour = $('<div></div>');
-        hour.addClass('hour col-2 pt-2');
+        hour = $('<label></label>');
+        hour.addClass(`hour col-2 pt-2 ${i}00`);
         timeBlock.append(hour);
         
         appointment = $('<input></input>');
-        appointment.addClass('text-dark col-8');
-        appointment.attr('type', 'text');
+        appointment.addClass(`text-dark col-8 ${i}00`);
+        // appointment.attr('type', 'text');
         timeBlock.append(appointment);
 
         button = $('<button><i>Save</i></button>');
-        button.addClass('saveBtn col-2');
+        button.addClass(`saveBtn col-2 ${i}00`);
+        // button.attr('type', 'submit');
         timeBlock.append(button);
 
-        appointment.attr('id', `appt${i}00`);
-        button.attr('id', `save${i}00`);
+        timeBlock.attr('id', `${i}00Hour`);
+        // appointment.attr('name', `${i}00`);
 
         if (i < 13) {
             console.log(i);
@@ -61,8 +62,8 @@ button = $('.saveBtn');
 // Listen for Submit Button
 button.click(function(event) {
     event.preventDefault();
-    let targetId = $(this).attr('id');
-    console.log (`${targetId} button was clicked`);
+    let targetValue = $(this).siblings('input').val();
+    console.log (`${targetValue} is registered`);
 });
 
 
