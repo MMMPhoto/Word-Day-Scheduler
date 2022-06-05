@@ -41,10 +41,10 @@ createTimeBlock = (timeBlock) => {
         hour.addClass(`hour text-wrap col-2 pt-4 pr-1 ${i}00`);
         timeBlock.append(hour);
         
-        appointment = $('<input>');
-        appointment.addClass(`text-dark text-wrap col-8 ${i}00`);
+        appointment = $('<textarea></textarea>');
+        appointment.addClass(`text-dark text-wrap pt-2 pl-2 col-8 ${i}00`);
         let eachEntry = calendarEntries[i-6].appt;
-        appointment.attr('value', `${eachEntry}`);
+        appointment.val(`${eachEntry}`);
         timeBlock.append(appointment);
 
         button = $('<button><i>Save</i></button>');
@@ -73,9 +73,9 @@ createTimeBlock(timeBlock);
 button = $('.saveBtn');
 
 // Listen for Submit Button
-button.click(function(event) {
+button.on('click', function(event) {
     event.preventDefault();
-    let targetValue = $(this).siblings('input').val();
+    let targetValue = $(this).siblings('textarea').val();
     let targetId = $(this).parent().attr('id');
     console.log(`${targetValue} is new appointment text`);
     console.log(`${targetId} is the Id`);
